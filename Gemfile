@@ -7,6 +7,9 @@ gem 'rails', '3.2.8'
 
 gem 'sqlite3'
 gem 'mysql2'
+gem 'unicorn'
+gem 'capistrano'
+gem 'libv8', '~> 3.11.8'
 
 # Gems used only for assets and not required
 # in production environments by default.
