@@ -1,0 +1,31 @@
+<h1>Listing specialists</h1>
+
+<table>
+  <tr>
+    <th>Fio</th>
+    <th>Login</th>
+    <th>Password</th>
+    <th>Admin</th>
+    <th>Mode</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @specialists.each do |specialist| %>
+  <tr>
+    <td><%= specialist.fio %></td>
+    <td><%= specialist.login %></td>
+    <td><%= specialist.password %></td>
+    <td><%= specialist.admin %></td>
+    <td><%= specialist.mode_id %></td>
+    <td><%= link_to 'Show', specialist %></td>
+    <td><%= link_to 'Edit', edit_specialist_path(specialist) %></td>
+    <td><%= link_to 'Destroy', specialist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Specialist', new_specialist_path %>

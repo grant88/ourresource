@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  fio: MyString
+  login: MyString
+  password: MyString
+  admin: false
+  mode_id: 1
+
+two:
+  fio: MyString
+  login: MyString
+  password: MyString
+  admin: false
+  mode_id: 1
