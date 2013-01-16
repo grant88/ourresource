@@ -1,0 +1,59 @@
+<h1>Запись на процедуру</h1>
+<%= form_tag('select_procedure', :name => 'select_proc') do  %>
+
+    <%= select :procedures,:id, @procedures_array,{ :selected => 1 }, { :size => Procedure.all.count } %>
+    <br>
+    <br>
+    <h3>Выберите период</h3>
+    <input name="week_start" id="week_start" class="datepicker_1" type="text" readonly="readonly" style="cursor: pointer;"> Начало периода
+    <br>
+    <input name="week_end" id="week_end" class="datepicker_2" type="text" readonly="readonly" style="cursor: pointer;"> Конец периода
+    <br>
+    <div id="err" style="color: red;">Заполните правильно все поля!</div>
+    <div class="actions">
+      <h2 onclick="check_fields()" style="text-decoration: underline;cursor:pointer;" >Продолжить</h2>
+    </div>
+<% end %>
+
+<script>
+
+    $(document).ready(function() {
+        $( ".datepicker_1" ).datepicker({
+            onSelect: function(date) {
+                $("#week_start").val(date);
+            },
+            minDate: "-0",
+            maxDate: "+2w", //maxDate: "+1m +1w +3d"
+            dateFormat : "yy-mm-dd",
+            firstDay: 1
+        });
+        $( ".datepicker_2" ).datepicker({
+            onSelect: function(date) {
+                $("#week_end").val(date);
+            },
+            minDate: "-0",
+            maxDate: "+2w", //maxDate: "+1m +1w +3d"
+            dateFormat : "yy-mm-dd",
+            firstDay: 1
+        });
+        $("#err").hide();
+        $('#week_start').focus(function() {
+            $("#err").hide();
+        });
+        $('#week_end').focus(function() {
+            $("#err").hide();
+        });
+    });
+    function check_fields(){
+        var week_start = Date.parse($("#week_start").val());
+        var week_end = Date.parse($("#week_end").val());
+        if ($("#week_start").val() == "" || $("#week_end").val() == "" || week_start>week_end  )
+        {
+            $("#err").show();
+        }
+        else
+        {
+            document.forms.select_proc.submit();
+        }
+    }
+</script>

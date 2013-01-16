@@ -11,7 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130103153253) do
+ActiveRecord::Schema.define(:version => 20130111090827) do
+
+  create_table "modes", :force => true do |t|
+    t.time     "s_time"
+    t.time     "f_time"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "procedures", :force => true do |t|
+    t.string   "name"
+    t.integer  "delay"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "procedures_specialists", :id => false, :force => true do |t|
+    t.integer  "procedure_id"
+    t.integer  "specialist_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "specialists", :force => true do |t|
     t.string   "fio"
@@ -19,8 +40,25 @@ ActiveRecord::Schema.define(:version => 20130103153253) do
     t.string   "password"
     t.boolean  "admin"
     t.integer  "mode_id"
+    t.integer  "room"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "specialists_procedures", :id => false, :force => true do |t|
+    t.integer  "procedure_id"
+    t.integer  "specialist_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "timetables", :force => true do |t|
+    t.integer  "specialist_id"
+    t.integer  "procedure_id"
+    t.datetime "time_start"
+    t.datetime "time_end"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
 end

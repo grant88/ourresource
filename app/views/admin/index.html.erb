@@ -1,0 +1,32 @@
+<%= form_tag('/admin/check',:name=>'login_form') do%>
+    <input name="login" id="login" type="text">
+    <input name="pass" id="pass" type="password">
+    <div id="err" style="color: red;">Заполните все поля!</div>
+    <h3 onclick="enter();" style="text-decoration: underline;cursor:pointer;" >Войти</h3>
+<%end%>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#login').focus();
+        $("#err").hide();
+        $("#login").val("");
+        $("#pass").val("");
+        $('#login').focus(function() {
+            $("#err").hide();
+            $("#login").val("");
+        });
+        $('#pass').focus(function() {
+            $("#err").hide();
+            $("#pass").val("");
+        });
+    });
+    function enter(){
+        if ($("#login").val() == '' || $("#pass").val() == '' )
+        {
+            $("#err").show();
+        }
+        else
+        {
+            document.forms.login_form.submit();
+        }
+    }
+</script>

@@ -1,30 +1,25 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Fio:</b>
+  <b>ФИО:</b>
   <%= @specialist.fio %>
 </p>
 
 <p>
-  <b>Login:</b>
+  <b>Логин:</b>
   <%= @specialist.login %>
 </p>
 
 <p>
-  <b>Password:</b>
+  <b>Пароль:</b>
   <%= @specialist.password %>
 </p>
 
 <p>
-  <b>Admin:</b>
-  <%= @specialist.admin %>
-</p>
-
-<p>
-  <b>Mode:</b>
+  <b>Режим работы:</b>
   <%= @specialist.mode_id %>
 </p>
 
 
-<%= link_to 'Edit', edit_specialist_path(@specialist) %> |
-<%= link_to 'Back', specialists_path %>
+<%= link_to 'Редактировать', edit_specialist_path(@specialist) %> |
+<%= link_to 'Назад', specialists_path %>

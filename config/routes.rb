@@ -1,6 +1,20 @@
-Ourresource::Application.routes.draw do
+  Ourresource::Application.routes.draw do
+
+  get "main/index"
+
+  post "selection_procedure/select_procedure"
+  post "selection_procedure/print"
+  match "selection_procedure/index" => 'selection_procedure#index'
+
+  match "specialist_enter/check" => "specialist_enter#check"
+  get "/specialist_enter/show_visits"
+
+  get "admin/index"
+  match 'admin/check' => 'admin#check'
+  resources :procedures
   resources :specialists
 
+  get 'main/logout'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -50,7 +64,7 @@ Ourresource::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'specialists#index'
+  root :to => 'main#index'
 
   # See how all your routes lay out with "rake routes"
 

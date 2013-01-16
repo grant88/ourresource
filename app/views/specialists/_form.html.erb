@@ -1,37 +1,62 @@
-<%= form_for(@specialist) do |f| %>
-  <% if @specialist.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@specialist.errors.count, "error") %> prohibited this specialist from being saved:</h2>
-
-      <ul>
-      <% @specialist.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for(@specialist, :html => {:name => "specialist"}) do |f| %>
+    <div class="field">
+      <%= f.label "Процедуры, выполняемые специалистом" %><br />
+      <% procedures_array = Procedure.all.collect {|p| [ p.name , p.id ] } %>
+      <%= select :procedures,:id, procedures_array,{ :selected => 1}, { :multiple => true, :size => Procedure.all.count, :include_blank => false } %>
     </div>
-  <% end %>
-
+    <%= link_to 'Добавить процедуру', new_procedure_path %>
   <div class="field">
-    <%= f.label :fio %><br />
+    <%= f.label "ФИО" %><br />
     <%= f.text_field :fio %>
   </div>
   <div class="field">
-    <%= f.label :login %><br />
+    <%= f.label 'Логин' %><br />
     <%= f.text_field :login %>
   </div>
   <div class="field">
-    <%= f.label :password %><br />
+    <%= f.label 'Пароль' %><br />
     <%= f.text_field :password %>
   </div>
   <div class="field">
-    <%= f.label :admin %><br />
-    <%= f.check_box :admin %>
+    <%= f.check_box :admin, :checked => false, :style => 'visibility: hidden' %>
   </div>
-  <div class="field">
-    <%= f.label :mode_id %><br />
-    <%= f.number_field :mode_id %>
-  </div>
+    <div class="field">
+        <%= f.label 'Режим работы' %><br />
+        <%= f.select :mode_id, Mode.all.collect {|p| [ p.s_time.strftime("%H:%M - ") + p.f_time.strftime("%H:%M") , p.id ] } %>
+    </div>
+    <div class="field">
+      <%= f.label "Номер кабинета" %><br />
+      <%= f.select :room, (200..299),{ :selected => 200 }, { :size => 7}  %>
+    </div>
+    <br>
+    <br>
+  <div id="err" style="color: red;">Заполните все поля!</div>
   <div class="actions">
-    <%= f.submit %>
+    <h2 onclick="check_fields()" style="text-decoration: underline;cursor:pointer;" >Применить</h2>
   </div>
 <% end %>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#err").hide();
+        $('#specialist_fio').focus(function() {
+            $("#err").hide();
+        });
+        $('#specialist_login').focus(function() {
+            $("#err").hide();
+        });
+        $('#specialist_password').focus(function() {
+            $("#err").hide();
+        });
+    });
+    function check_fields(){
+        if ($("#specialist_fio").val() == "" || $("#specialist_login").val() == "" || $("#specialist_password").val() == "" )
+        {
+            $("#err").show();
+        }
+        else
+        {
+            document.forms.specialist.submit();
+        }
+    }
+</script>

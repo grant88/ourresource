@@ -1,0 +1,35 @@
+<%= form_for(@procedure, :html => {:name => 'pocedure'}) do |f| %>
+  <div class="field">
+    <%= f.label 'Название' %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label "Продолжительность, минут" %><br />
+    <%= f.select :delay, [10,15,20,25,30,35,40,45,50,55,60],{ :selected => 10 }, { :size => 7}  %>
+  </div>
+  <div id="err" style="color: red;">Заполните все поля!</div>
+  <div class="actions">
+    <h2 onclick="check_fields()" style="text-decoration: underline;cursor:pointer;" >Применить</h2>
+  </div>
+<% end %>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#err").hide();
+        $('#login').focus(function() {
+            $("#err").hide();
+        });
+        $('#procedure_delay').focus(function() {
+            $("#err").hide();
+        });
+    });
+    function check_fields(){
+        if ($("#procedure_name").val() == "" || $("#procedure_delay").val() == "" )
+        {
+            $("#err").show();
+        }
+        else
+        {
+            document.forms.pocedure.submit();
+        }
+    }
+</script>

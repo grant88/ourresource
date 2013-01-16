@@ -1,0 +1,27 @@
+<h1>Список процедур</h1>
+
+<table id="table">
+  <thead>
+  <tr>
+    <th>Наименование</th>
+    <th>Продолжительность</th>
+    <th>Функции</th>
+  </tr>
+  </thead>
+  <tbody>
+        <% @procedures.each do |procedure| %>
+          <tr>
+            <td><%= procedure.name %></td>
+            <td><%= procedure.delay %></td>
+            <td>
+                <%= link_to 'Редактировать', edit_procedure_path(procedure) %>
+                <%= link_to 'Удалить', procedure, method: :delete, data: { confirm: 'Вы уверены?' } %>
+            </td>
+          </tr>
+        <% end %>
+  </tbody>
+</table>
+
+<br/>
+
+<%= link_to 'Создать процедуру', new_procedure_path %>

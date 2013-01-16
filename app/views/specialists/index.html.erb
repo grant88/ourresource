@@ -1,31 +1,33 @@
-<h1>Listing specialists</h1>
+<h1>Список специалистов</h1>
 
-<table>
+<table id="table">
+  <thead>
   <tr>
-    <th>Fio</th>
-    <th>Login</th>
-    <th>Password</th>
-    <th>Admin</th>
-    <th>Mode</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>ФИО</th>
+    <th>Логин</th>
+    <th>Пароль</th>
+    <th>Режим работы</th>
+    <th>Номер кабинета</th>
+    <th>Функции</th>
   </tr>
-
-<% @specialists.each do |specialist| %>
-  <tr>
-    <td><%= specialist.fio %></td>
-    <td><%= specialist.login %></td>
-    <td><%= specialist.password %></td>
-    <td><%= specialist.admin %></td>
-    <td><%= specialist.mode_id %></td>
-    <td><%= link_to 'Show', specialist %></td>
-    <td><%= link_to 'Edit', edit_specialist_path(specialist) %></td>
-    <td><%= link_to 'Destroy', specialist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  </thead>
+  <tbody>
+    <% @specialists.each do |specialist| %>
+      <tr>
+        <td><%= specialist.fio %></td>
+        <td><%= specialist.login %></td>
+        <td><%= specialist.password %></td>
+        <td><%= specialist.mode_id %></td>
+        <td><%= specialist.room %></td>
+        <td>
+            <%= link_to 'Редактировать', edit_specialist_path(specialist) %>
+            <%= link_to 'Удалить', specialist, method: :delete, data: { confirm: 'Вы уверены?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br />
 
-<%= link_to 'New Specialist', new_specialist_path %>
+<%= link_to 'Добавить нового специалиста', new_specialist_path %>

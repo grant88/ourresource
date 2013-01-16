@@ -1,0 +1,30 @@
+<table id="table">
+  <thead>
+      <tr>
+        <th>Начало процедуры</th>
+        <th>Конец процедуры</th>
+        <th>Продолжительность</th>
+        <th>Специалист</th>
+        <th>Функции</th>
+      </tr>
+  </thead>
+  <tbody>
+    <% @end_array.each do |p| %>
+        <tr>
+            <td><%= p[:time_start].to_formatted_s(:short)  %></td>
+            <td><%= p[:time_end].to_formatted_s(:short) %></td>
+            <td><%= p[:delay] %></td>
+            <td><%= p[:spec_name] %></td>
+            <td>
+              <%= form_tag('print') do %>
+                  <input name="timetable[time_start]" type="text" hidden value="<%= p[:time_start] %>">
+                  <input name="timetable[time_end]" type="text" hidden value="<%= p[:time_end] %>">
+                  <input name="timetable[procedure_id]" type="text" hidden value="<%= p[:procedure_id] %>">
+                  <input name="timetable[specialist_id]" type="text" hidden value="<%= p[:specialist_id] %>">
+                  <%= submit_tag 'Записаться' %>
+              <% end %>
+            </td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>

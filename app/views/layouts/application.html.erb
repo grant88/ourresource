@@ -4,11 +4,32 @@
   <title>Ourresource</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+  <link type="text/css" rel="stylesheet" media="all" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+<div>
+  <% session[:user] == nil ? login = "" : login = session[:user][:login] %>
+  <% session[:user] == nil ? exit = "" :  exit = "Выйти"  %>
+  <div style="float: left;">
+    <% unless (current_page?('/') or (current_page?('/main/index')))  %>
+        <%= link_to 'На главную', '/' %>
+        <% unless session[:user]==nil %>
+            <% if session[:user][:admin] %>
+                <%= link_to 'Специалисты', '/specialists' %>
+                <%= link_to 'Процедуры', '/procedures' %>
+            <% end %>
+        <% end %>
+    <% end %>
+  </div>
+  <div style="float: right;"><%= login  %> <%= link_to exit, '/main/logout' %></div>
+</div>
+<br>
+<br>
+<br>
+<div style="text-align: center;">
+  <%= yield %>
+</div>
 </body>
 </html>

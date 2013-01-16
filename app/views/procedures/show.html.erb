@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Наименование процедуры</b>
+  <%= @procedure.name %>
+</p>
+
+<p>
+  <b>Продолжительность процедуры</b>
+  <%= @procedure.delay %>
+</p>
+
+<%= link_to 'Редактировать', edit_procedure_path(@procedure) %> |
+<%= link_to 'Назад', procedures_path %>

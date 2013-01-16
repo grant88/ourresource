@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  specialist_id: 1
+  procedure_id: 1
+  num_ticket: 1
+  time_start: 2013-01-04
+
+two:
+  specialist_id: 1
+  procedure_id: 1
+  num_ticket: 1
+  time_start: 2013-01-04

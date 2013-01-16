@@ -1,0 +1,9 @@
+<h2>Номер вашего талона</h2>
+<h1><%= @timetable.id %></h1>
+
+Начало процедуры: <h2><%= @timetable.time_start.to_formatted_s(:short)  %></h2>
+Название процедуры: <h2><%= Procedure.find(@timetable.procedure_id).name  %></h2>
+Продолжительность процедуры: <h2><%= Procedure.find(@timetable.procedure_id).delay %></h2>
+ФИО специалиста: <h2><%= Specialist.find(@timetable.specialist_id).fio  %></h2>
+Номер кабинета: <h2><%= Specialist.find(@timetable.specialist_id).room  %></h2>
+<a href="#" onclick="window.print();return false;">Распечатать</a>

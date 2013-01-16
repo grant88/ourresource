@@ -1,6 +1,7 @@
 class SpecialistsController < ApplicationController
   # GET /specialists
   # GET /specialists.json
+  before_filter :check_login
   def index
     @specialists = Specialist.all
 
@@ -44,6 +45,15 @@ class SpecialistsController < ApplicationController
 
     respond_to do |format|
       if @specialist.save
+
+        @arr = params[:procedures][:id]
+        @arr.each_index do |i|
+          if i!=0
+            SpecialistsProcedures.create(:procedure_id => @arr[i], :specialist_id => @specialist.id)
+            ProceduresSpecialists.create(:procedure_id => @arr[i], :specialist_id => @specialist.id)
+          end
+        end
+
         format.html { redirect_to @specialist, notice: 'Specialist was successfully created.' }
         format.json { render json: @specialist, status: :created, location: @specialist }
       else

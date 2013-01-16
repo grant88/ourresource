@@ -1,0 +1,21 @@
+<h1>Записи на процедуры</h1>
+<table id="table">
+  <thead>
+  <tr>
+    <th>Начало процедуры</th>
+    <th>Конец процедуры</th>
+    <th>Продолжительность</th>
+    <th>Номер талона</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @timetables.each do |t| %>
+      <tr>
+        <td><%= t.time_start.to_formatted_s(:short)  %></td>
+        <td><%= t.time_end.to_formatted_s(:short) %></td>
+        <td><%= ((t.time_end - t.time_start)/60).to_i %></td>
+        <td><%= t.id %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

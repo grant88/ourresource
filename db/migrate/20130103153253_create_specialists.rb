@@ -6,6 +6,7 @@ class CreateSpecialists < ActiveRecord::Migration
       t.string :password
       t.boolean :admin
       t.integer :mode_id
+      t.integer :room
 
       t.timestamps
     end
