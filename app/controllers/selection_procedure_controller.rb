@@ -12,8 +12,10 @@ class SelectionProcedureController < ApplicationController
      @procedure_id = params[:procedures][:id]
      @time_start = DateTime.parse(params[:week_start])+8.hour
      @time_end = DateTime.parse(params[:week_end])+15.hour
+
      @days_count = (@time_end - @time_start).to_i+1
      @end_array = []
+     @time_now = DateTime.now
      @specialists_ids = []
      @procedure = Procedure.find(@procedure_id)
      @spec_arr = @procedure.specialists.all
@@ -55,14 +57,16 @@ class SelectionProcedureController < ApplicationController
          @interval.each do |interval|
            @time_iterator = interval[:start]
            while (@time_iterator >= interval[:start]) and ((@time_iterator + @procedure.delay.minute) <= interval[:end] )
+             if @time_now <= @time_iterator
                @end_array << {:time_start => @time_iterator,:delay => @procedure.delay, :time_end => @time_iterator + @procedure.delay.minute, :procedure_id => @procedure.id, :proc_name => @procedure.name, :specialist_id => s_id, :spec_name => @cur_spec.fio  }
+             end
                @time_iterator = @time_iterator + min_delay.minute
            end
          end
 
        end
 
-       @day_iterator = @day_iterator + d.day
+       @day_iterator = @day_iterator + 1.day
      end
 
   end
